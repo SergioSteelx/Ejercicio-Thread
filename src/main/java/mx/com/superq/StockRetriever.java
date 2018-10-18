@@ -17,49 +17,27 @@ public class StockRetriever implements Runnable
         this.company=company;
     }
 
-    public BigDecimal getStockPrice() throws IOException
-    {
-
-        Stock stock = YahooFinance.get(company);
-        //stock.print();
-        BigDecimal price = stock.getQuote().getPrice();
-
-
-        return price;
-    }
-
-
     @Override
     public void run() {
         BigDecimal subtotal = new BigDecimal(0.0);
-        try {
+        try
+        {
 
-            //synchronized(this) {
+            Stock stock = YahooFinance.get(company);
 
-                BigDecimal price = getStockPrice();
+            BigDecimal price = stock.getQuote().getPrice();
 
-                subtotal = subtotal.add(price);
+            subtotal = subtotal.add(price);
 
-            TestStock.total = subtotal;
+            TestStock.total = TestStock.total.add(subtotal);
 
             System.out.println(TestStock.total);
-            //}
+            System.out.println(subtotal);
 
-            //notify();
-
-
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-
 }
