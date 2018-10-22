@@ -29,10 +29,7 @@ public class StockRetriever implements Runnable
 
             subtotal = subtotal.add(price);
 
-            TestStock.total = TestStock.total.add(subtotal);
-
-            System.out.println(TestStock.total);
-            System.out.println(subtotal);
+            //System.out.println(subtotal);
 
         }
         catch (IOException e)
